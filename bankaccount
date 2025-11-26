@@ -1,0 +1,69 @@
+class BankAccount {
+   String accountnumber;
+   String customername;
+   double balance;
+   static int accountcount = 0;
+   static double interestrate = 4.5;
+
+   BankAccount(String var1, String var2, double var3) {
+      this.accountnumber = var1;
+      this.customername = var2;
+      this.balance = var3;
+      ++accountcount;
+   }
+
+   void deposit(double var1) {
+      if (var1 > 0.0) {
+         this.balance += var1;
+      } else {
+         System.out.println("INVALID AMOUNT");
+      }
+
+   }
+
+   void withdraw(double var1) {
+      if (this.balance >= var1 && var1 > 0.0) {
+         this.balance -= var1;
+      } else if (var1 < 0.0) {
+         System.out.println("CANNOT WITHDRAW A NEGATIVE AMOUNT");
+      } else {
+         System.out.println("INSUFFICIENT BALANCE");
+      }
+
+   }
+
+   void addInterest(double var1) {
+      if (var1 <= 0.0) {
+         System.out.println("NO INTEREST ADDED");
+      } else {
+         double var3 = interestrate / 100.0;
+         this.balance += this.balance * var3 * var1;
+      }
+
+   }
+
+   static void changeTnterestRate(double var0) {
+      if (var0 < 0.0) {
+         System.out.println("NO NEGATIVE INTEREST RATE ALLOWED");
+      } else {
+         interestrate = var0;
+      }
+
+   }
+
+   static int getAccountCount() {
+      return accountcount;
+   }
+
+   static double getInterestRate() {
+      return interestrate;
+   }
+
+   void displayDetails() {
+      System.out.println("ACCOUNT NUMBER " + this.accountnumber + "\nCUSTOMER NAME: " + this.customername + "\nBALANCE: " + this.balance);
+   }
+
+   static {
+      System.out.println("STATIC BLOCK : INTEREST RATE:" + interestrate + "%");
+   }
+}
